@@ -1,12 +1,10 @@
 import turtle
 
-# Configuração da tela
 screen = turtle.Screen()
 screen.title("Labirinto com Turtle")
 screen.setup(600, 600)
 screen.setworldcoordinates(0, 0, 600, 600)
 
-# Classe para criar os blocos do labirinto
 class Block(turtle.Turtle):
     def __init__(self):
         super().__init__()
@@ -15,12 +13,11 @@ class Block(turtle.Turtle):
         self.penup()
         self.speed(0)
 
-# Função para desenhar o labirinto
 def draw_maze():
     maze = [
-        "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-        "X   X                 XXX",
-        "X X XXXXXXX  XXXXXXX  XXXX",
+        "XXXXXXXXXXXXXXXXXXXXXXX",
+        "X   X                 X",
+        "X X XXXXXXX  XXXXXXX  X",
         "X X   X   X X       X",
         "X XXX X X X X XXX X X",
         "X X   X X X X X   X X",
@@ -51,17 +48,14 @@ def draw_maze():
 
     return start_x, start_y
 
-# Desenha o labirinto de acordo com a matriz que o dev desenhou
 start_x, start_y = draw_maze()
 
-# Tartaruga do jogador
 player = turtle.Turtle()
 player.shape("turtle")
 player.color("red")
 player.penup()
 player.goto(start_x, start_y)
 
-# Funções para mover o jogador
 def go_up():
     x = player.xcor()
     y = player.ycor() + 20
@@ -90,18 +84,15 @@ def go_right():
         player.pendown()
         player.goto(x, y)
 
-# Configuração dos movimentos da tartaruga
 screen.listen()
 screen.onkey(go_up, "Up")
 screen.onkey(go_down, "Down")
 screen.onkey(go_left, "Left")
 screen.onkey(go_right, "Right")
 
-# Obtenção das coordenadas dos blocos sólidos
 walls = set()
 for block in screen.turtles():
     if block.color()[0] == "black":
         walls.add((round(block.xcor()), round(block.ycor())))
 
-# Mantém a janela aberta
 turtle.done()
